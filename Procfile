@@ -1,0 +1,1 @@
+web: gunicorn Flash_Deployment:app
