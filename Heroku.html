@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Predict Medical Charges</title>
+</head>
+<body>
+	<h1>Predict Medical Charges</h1>
+	<form>
+		<label for="age">Age:</label>
+		<input type="text" id="age" name="age"><br><br>
+		<label for="sex">Sex:</label>
+		<select id="sex" name="sex">
+			<option value="0">Female</option>
+			<option value="1">Male</option>
+		</select><br><br>
+		<label for="bmi">BMI:</label>
+		<input type="text" id="bmi" name="bmi"><br><br>
+		<label for="children">Number of Children:</label>
+		<input type="text" id="children" name="children"><br><br>
+		<label for="smoker">Smoker:</label>
+		<select id="smoker" name="smoker">
+			<option value="0">No</option>
+			<option value="1">Yes</option>
+		</select><br><br>
+		<input type="button" value="Submit" onclick="sendData()">
+	</form>
+	<div id="response"></div>
+	<script>
+		function sendData() {
+			const age = document.getElementById("age").value;
+			const sex = document.getElementById("sex").value;
+			const bmi = document.getElementById("bmi").value;
+			const children = document.getElementById("children").value;
+			const smoker = document.getElementById("smoker").value;
+            const data = JSON.stringify({ "age": parseFloat(age), "sex": parseInt(sex), "bmi": parseFloat(bmi), "children": parseInt(children), "smoker": parseInt(smoker) });
+        console.log(data)
+
+		fetch('http://127.0.0.1:5000//InsurancePredict', {
+			method: 'POST',
+			body: data,
+			headers: {
+				'Content-Type': 'application/json'
+			}
+		})
+		.then(response => response.json())
+		.then(data => {
+			console.log('Success:', data);
+			const responseDiv = document.getElementById("response");
+			responseDiv.innerHTML = "Estimated Charges: " + data;
+		})
+		.catch((error) => {
+			console.error('Error:', error);
+		});
+	}
+    </script>
+</body>
+</html>
