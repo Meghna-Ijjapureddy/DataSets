@@ -1,0 +1,18 @@
+file_type: csv
+dataset_name: file
+file_name: allRNA_112RNA_corr_by6ss
+table_name: edsurv
+inbound_delimiter: ","
+outbound_delimiter: "|"
+skip_leading_rows: 1
+columns: 
+    - unnamed_0
+    - unnamed_1
+    - sample_size
+    - RNA1
+    - RNA2
+    - corr_coeff
+    - t_stats
+    - p_value
+    - bh_p_value
+    - bonf_p_value
